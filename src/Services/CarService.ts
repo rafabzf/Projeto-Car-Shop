@@ -28,9 +28,9 @@ class CarService {
     return this.crateCarDomain(carNew);
   }
 
-  public async findById(): Promise<{ type: number, message: ICar[] | null | string }> {
+  public async findAll(): Promise<{ type: number, message: ICar[] | null | string }> {
     const odmCar = new CarODM();
-    const cars = await odmCar.findById();
+    const cars = await odmCar.findAll();
 
     if (!cars) {
       return {

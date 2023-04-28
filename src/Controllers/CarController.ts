@@ -41,8 +41,8 @@ class CarController {
     }
   }
 
-  public async findById() {
-    const { type, message } = await this.service.findById();
+  public async findAll() {
+    const { type, message } = await this.service.findAll();
 
     if (type) {
       return this.res

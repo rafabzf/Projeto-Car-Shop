@@ -7,7 +7,7 @@ routers.post('/cars', (req: Request, res: Response, next: NextFunction) =>
   new CarController(req, res, next).create());
 
 routers.get('/cars', (req: Request, res: Response, next: NextFunction) => 
-  new CarController(req, res, next).findById());
+  new CarController(req, res, next).findAll());
 
 routers.get('/cars/:id', (req: Request, res: Response, next: NextFunction) => 
   new CarController(req, res, next).findOneCar());
