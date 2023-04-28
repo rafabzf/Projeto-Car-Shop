@@ -12,4 +12,7 @@ routers.get('/cars', (req: Request, res: Response, next: NextFunction) =>
 routers.get('/cars/:id', (req: Request, res: Response, next: NextFunction) => 
   new CarController(req, res, next).findOneCar());
 
+routers.put('/cars/:id', (req: Request, res: Response, next: NextFunction) => 
+  new CarController(req, res, next).upById());
+
 export default routers;

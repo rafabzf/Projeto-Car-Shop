@@ -3,6 +3,8 @@ import Car from '../Domains/Car';
 import ICar from '../Interfaces/ICar';
 import CarODM from '../Models/CarODM';
 
+const notFoundMessage = 'Car not found'; 
+
 class CarService {
   private crateCarDomain(car: ICar | null): Car | null {
     if (car) {
@@ -35,7 +37,7 @@ class CarService {
     if (!cars) {
       return {
         type: 404,
-        message: 'Car not found',
+        message: notFoundMessage,
       };
     } 
     return {
@@ -60,12 +62,59 @@ class CarService {
     if (!car) {
       return {
         type: 404,
-        message: 'Car not found',
+        message: notFoundMessage,
       };
     } 
     return {
       type: 0,
       message: car,
+    };
+  }
+
+  public async upById({
+    id,
+    model,
+    year,
+    color,
+    buyValue,
+    seatsQty,
+    doorsQty,
+    status,
+  }: ICar): Promise<{ type: number, message: ICar | null | string }> {
+    const odmCar = new CarODM();
+
+    const idValidation = isValidObjectId(id);
+
+    if (!idValidation) {
+      return {
+        type: 422,
+        message: 'Invalid mongo id',
+      };
+    }
+
+    const car = await odmCar.findOneCar(id as string);
+
+    if (!car) {
+      return {
+        type: 404,
+        message: notFoundMessage,
+      };
+    }
+
+    await odmCar.upById({
+      id,
+      model,
+      year,
+      color,
+      buyValue,
+      seatsQty,
+      doorsQty,
+      status,
+    } as ICar);
+
+    return {
+      type: 0,
+      message: '',
     };
   }
 }
