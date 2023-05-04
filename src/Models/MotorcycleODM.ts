@@ -15,19 +15,7 @@ class MotorcycleODM extends AbstractODM<IMotorcycle> {
   }
 
   public async create(moto: IMotorcycle): Promise<IMotorcycle | null> {
-    await this.model.create({ ...moto });
-
-    const motoNew = await this.model.findOne({
-      model: moto.model,
-      year: moto.year,
-      color: moto.color,
-      buyValue: moto.buyValue,
-      doorsQty: moto.category,
-      seatsQty: moto.engineCapacity,
-      status: moto.status,
-    });
-
-    return motoNew;
+    return this.model.create({ ...moto });
   }
 }
 

@@ -5,7 +5,11 @@ import ICar from '../../../src/Interfaces/ICar';
 import CarService from '../../../src/Services/CarService';
 import Car from '../../../src/Domains/Car';
 
-describe('Testa a camada Service', function () {
+describe('Testa a camada Service de Car', function () {
+  afterEach(function () {
+    Sinon.restore();
+  });
+
   const input: ICar = {
     model: 'Marea',
     year: 2002,
